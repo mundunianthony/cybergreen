@@ -1,0 +1,3 @@
+# Normalise line endings so Prettier's check behaves identically on the
+# Windows dev machine and the Linux CI runner.
+* text=auto eol=lf
