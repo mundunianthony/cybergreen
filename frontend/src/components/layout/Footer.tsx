@@ -99,12 +99,12 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/10 py-6">
-          <ul className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/50">
+          <ul className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/70">
             {hashtags.map((tag) => (
               <li key={tag}>{tag}</li>
             ))}
           </ul>
-          <div className="mt-5 flex flex-col gap-2 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-5 flex flex-col gap-2 text-xs text-white/70 sm:flex-row sm:items-center sm:justify-between">
             <p>
               &copy; {new Date().getFullYear()} {company.registeredName}. All
               rights reserved.

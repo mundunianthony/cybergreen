@@ -16,8 +16,11 @@
   /* Brand */
   --color-canopy: #143620; /* deep forest green - nav, footer, dark bands */
   --color-canopy-700: #1c4a2c; /* one step up, for borders on dark ground */
-  --color-signal: #3f9142; /* primary brand green - CTAs, links, active */
-  --color-signal-700: #2f7433; /* hover/pressed state for signal surfaces */
+  /* Primary brand green. Darkened from the logo's #3f9142, which only reached
+     3.65:1 on the light surface and failed WCAG AA for text. This hits 5.31:1
+     on surface and 5.73:1 behind white button text. */
+  --color-signal: #2f7433;
+  --color-signal-700: #245827; /* hover/pressed state for signal surfaces */
   --color-signal-300: #6ec46f; /* lighter tint - brand green on dark grounds */
   --color-circuit: #c98f3a; /* warm gold accent - never a background */
   --color-ink: #1b2420; /* warm near-black body text */

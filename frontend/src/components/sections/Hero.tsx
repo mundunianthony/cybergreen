@@ -4,19 +4,12 @@ import { ButtonLink } from "@/components/ui/Button";
 import { company, hero, heroPhotos } from "@/data/content";
 
 /**
- * The site's single orchestrated animation, played once on first load: the
- * circuit traces draw themselves outward across the leaf, then the headline
- * and supporting copy settle in behind them.
+ * The site's one orchestrated load animation.
  *
- * Deliberately a server component driven by CSS keyframes rather than a
- * client-side motion library. The copy is therefore present and opaque in the
- * server-rendered HTML - the animation only moves it - so the headline can
- * never be left invisible by a JS failure, and it costs no client JS at all.
- * The keyframes are disabled wholesale by the prefers-reduced-motion block in
- * globals.css.
- *
- * Layout is editorial rather than the centred SaaS default: copy holds the
- * left column, the mark the right, stacking on mobile.
+ * Driven by CSS keyframes in a server component rather than a motion library:
+ * the copy ships opaque in the server-rendered HTML and the animation only
+ * moves it, so a JS failure can never leave the headline invisible.
+ * prefers-reduced-motion disables it in globals.css.
  */
 export function Hero() {
   return (
@@ -26,7 +19,7 @@ export function Hero() {
         alt={heroPhotos.home.alt}
         fill
         priority
-        sizes="100vw"
+        sizes="(max-width: 1600px) 100vw, 1600px"
         className="object-cover opacity-45"
       />
       <div

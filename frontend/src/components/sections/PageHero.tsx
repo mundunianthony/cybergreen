@@ -23,7 +23,7 @@ export function PageHero({ title, intro, photo, children }: PageHeroProps) {
         alt={photo.alt}
         fill
         priority
-        sizes="100vw"
+        sizes="(max-width: 1600px) 100vw, 1600px"
         className="object-cover opacity-40"
       />
       <div

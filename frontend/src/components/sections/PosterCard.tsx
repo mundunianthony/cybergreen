@@ -3,14 +3,9 @@ import { Download } from "lucide-react";
 import { photos, type Poster } from "@/data/content";
 
 /**
- * A downloadable poster.
- *
- * The real print-ready poster files are not in the repository yet - see
- * public/downloads/README.md - so the card shows a relevant stand-in photo
- * rather than the actual artwork, and the download link is disabled with a
- * short note instead of offering a file that would 404. Once the real files
- * land under the names declared in data/content.ts, swap the <Image> source
- * to the poster file itself and re-enable the link.
+ * A poster card. The real artwork is not in the repo yet, so this shows a
+ * stand-in photo and a "Coming soon" label rather than a link that would 404.
+ * See public/downloads/README.md to swap in the real files.
  */
 export function PosterCard({ poster }: { poster: Poster }) {
   const photo = photos[poster.previewPhoto];
