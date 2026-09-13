@@ -3,12 +3,14 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Stat } from "@/components/ui/Stat";
 import { Icon } from "@/components/ui/Icon";
+import { ArrowUpRight } from "lucide-react";
 import { TipColumns } from "@/components/sections/TipColumns";
 import { PosterCard } from "@/components/sections/PosterCard";
 import { CTASection } from "@/components/sections/CTASection";
 import { PageHero } from "@/components/sections/PageHero";
 import {
   environmentalImpacts,
+  externalResources,
   ewasteStats,
   fastestGrowingStreams,
   healthImpacts,
@@ -31,7 +33,7 @@ export default function ResourcesPage() {
     <>
       <PageHero
         title="Learn it, teach it, pass it on"
-        intro="Everything on this page is free to use in a classroom, a staff meeting or at home. The posters at the bottom are ready to print."
+        intro="Everything on this page is free to use in a classroom, a staff meeting or at home, with links to the primary sources behind the figures."
         photo={heroPhotos.resources}
       />
 
@@ -198,13 +200,51 @@ export default function ResourcesPage() {
       <section id="posters" className="scroll-mt-24 py-20 sm:py-24">
         <Container>
           <SectionHeading
-            title="Download our posters"
-            intro="Print them for a classroom wall, a staff noticeboard or a community meeting. Free to use and share."
+            title="Our awareness posters"
+            intro="Three awareness posters for classroom walls, staff noticeboards and community meetings. Printable versions are on the way - contact us if you need one sooner."
           />
           <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {posters.map((poster) => (
               <li key={poster.file} className="flex">
                 <PosterCard poster={poster} />
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      {/* Further reading - verified primary sources */}
+      <section className="border-surface-200 border-t py-20 sm:py-24">
+        <Container>
+          <SectionHeading
+            title="Further reading"
+            intro="The primary sources behind the figures above, and the Ugandan authorities responsible for e-waste and online safety."
+          />
+          <ul className="border-surface-200 mt-10 border-t">
+            {externalResources.map((resource) => (
+              <li key={resource.href} className="border-surface-200 border-b">
+                <a
+                  href={resource.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group grid gap-2 py-6 transition-colors sm:grid-cols-[18rem_1fr] sm:gap-8"
+                >
+                  <div>
+                    <h3 className="font-display text-canopy group-hover:text-signal inline-flex items-start gap-1.5 text-lg font-semibold transition-colors">
+                      {resource.title}
+                      <ArrowUpRight
+                        className="mt-1 h-4 w-4 shrink-0"
+                        aria-hidden="true"
+                      />
+                    </h3>
+                    <p className="text-signal mt-1 text-sm">
+                      {resource.publisher}
+                    </p>
+                  </div>
+                  <p className="text-ink-600 text-sm leading-relaxed">
+                    {resource.description}
+                  </p>
+                </a>
               </li>
             ))}
           </ul>

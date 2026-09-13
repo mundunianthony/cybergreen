@@ -749,6 +749,49 @@ export const trainings = [
 /* 8.13 Downloadable posters                                           */
 /* ------------------------------------------------------------------ */
 
+export interface ExternalResource {
+  title: string;
+  publisher: string;
+  description: string;
+  href: string;
+}
+
+/**
+ * Authoritative external references, for readers who want the primary sources
+ * behind the statistics on this page or the regulators involved in Uganda.
+ * Every URL was checked before being added - re-check if they go stale.
+ */
+export const externalResources: readonly ExternalResource[] = [
+  {
+    title: "The Global E-waste Monitor 2024",
+    publisher: "ITU & UNITAR",
+    description:
+      "The primary source for the global figures quoted on this page, including the 62 million tonnes generated in 2022 and the 82 million tonne projection for 2030.",
+    href: "https://ewastemonitor.info/the-global-e-waste-monitor-2024/",
+  },
+  {
+    title: "National Environment Management Authority",
+    publisher: "NEMA Uganda",
+    description:
+      "Uganda's environmental regulator - waste handling regulations, compliance requirements and licensing for organisations disposing of electronic equipment.",
+    href: "https://www.nema.go.ug/",
+  },
+  {
+    title: "Uganda Communications Commission",
+    publisher: "UCC",
+    description:
+      "The national communications regulator, including consumer guidance on online safety, digital fraud and reporting cybercrime in Uganda.",
+    href: "https://ucc.co.ug/",
+  },
+  {
+    title: "Child Online Protection",
+    publisher: "International Telecommunication Union",
+    description:
+      "ITU's global guidance for parents, educators and policymakers on keeping children safe online - the framework behind much of our schools programme.",
+    href: "https://www.itu.int/en/ITU-D/Cybersecurity/Pages/COP.aspx",
+  },
+] as const;
+
 export const posters: readonly Poster[] = [
   {
     title: "Responsible Tech: Securing Our Future, Greening Our Planet",

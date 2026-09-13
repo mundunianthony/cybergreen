@@ -14,6 +14,7 @@ import {
   corePurposeStatement,
   cybercrimeStat,
   heroPhotos,
+  impactGoals,
   mission,
   vision,
   whyChooseUs,
@@ -137,6 +138,29 @@ export default function AboutPage() {
               </p>
             </blockquote>
           </figure>
+        </Container>
+      </section>
+
+      {/* What we are working toward - the response to the challenges above */}
+      <section className="border-surface-200 border-y bg-white py-20 sm:py-24">
+        <Container>
+          <SectionHeading
+            title="What we are working toward"
+            intro="The targets CyberGreen has set for its initial years of operation."
+          />
+          <ol className="mt-10 grid gap-x-12 gap-y-6 sm:grid-cols-2">
+            {impactGoals.map((goal, index) => (
+              <li key={goal} className="flex gap-4">
+                <span
+                  aria-hidden="true"
+                  className="font-display text-signal text-sm tabular-nums"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="text-ink-600 leading-relaxed">{goal}</span>
+              </li>
+            ))}
+          </ol>
         </Container>
       </section>
 
