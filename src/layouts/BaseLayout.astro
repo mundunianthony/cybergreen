@@ -1,0 +1,43 @@
+---
+import "../styles/global.css";
+import CtaBand from "../components/CtaBand.astro";
+import Seo from "../components/Seo.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import type { RoutePath } from "../data/site";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Route of this page. Drives the active menu item and the canonical URL. */
+  path: RoutePath;
+  ogImage?: string;
+}
+
+const { title, description, path, ogImage } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <Seo title={title} description={description} path={path} ogImage={ogImage} />
+    <link rel="icon" href="/assets/img/favicon.png" />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <SiteHeader current={path} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <CtaBand />
+    <SiteFooter />
+    <script>
+      import "../scripts/site";
+    </script>
+  </body>
+</html>

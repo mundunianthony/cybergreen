@@ -1,0 +1,32 @@
+---
+import styles from "./Stats.module.css";
+
+export interface Stat {
+  /** Text shown before the count-up runs (and without JavaScript), e.g. "41,000". */
+  display: string;
+  /** Final value for the count-up animation. Omit for values that should not animate ("<1", "1 in 5"). */
+  count?: string;
+  /** Prefix kept during the count-up, e.g. "UGX ". */
+  prefix?: string;
+  unit?: string;
+  text: string;
+}
+
+interface Props {
+  items: readonly Stat[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class:list={[styles.stats, "reveal-stagger"]}>
+  {items.map((s) => (
+    <div class={styles.stat}>
+      <b data-count={s.count} data-pre={s.prefix}>
+        {s.display}
+        {s.unit && <small>{s.unit}</small>}
+      </b>
+      <p>{s.text}</p>
+    </div>
+  ))}
+</div>

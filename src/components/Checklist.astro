@@ -1,0 +1,26 @@
+---
+import styles from "./Checklist.module.css";
+
+export interface ChecklistItem {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  items: readonly ChecklistItem[];
+  class?: string;
+}
+
+const { items, class: className } = Astro.props;
+---
+
+<ol class:list={[styles.checklist, className]}>
+  {items.map((item) => (
+    <li>
+      <div>
+        <b>{item.title}</b>
+        <p>{item.text}</p>
+      </div>
+    </li>
+  ))}
+</ol>

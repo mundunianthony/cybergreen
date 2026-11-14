@@ -1,0 +1,22 @@
+---
+import { collectedItems } from "../data/site";
+import styles from "./Marquee.module.css";
+
+const label = `Items we collect: ${collectedItems.join(", ")}`;
+// The list is rendered twice so the track can loop seamlessly; the visual track is hidden from
+// assistive technology and the container's aria-label carries the full list instead.
+const copies = [0, 1] as const;
+---
+
+<div class={styles.marquee} role="group" aria-label={label}>
+  <div class={styles.track} aria-hidden="true">
+    {copies.map(() => (
+      <ul>
+        <li class={styles.tag}>What we collect</li>
+        {collectedItems.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</div>

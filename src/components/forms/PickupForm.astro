@@ -1,0 +1,85 @@
+---
+import { PUBLIC_FORMSPREE_PICKUP_ID } from "astro:env/client";
+import { formspreeEndpoint } from "../../lib/formspree";
+import Chips from "./Chips.astro";
+import ComposeForm from "./ComposeForm.astro";
+import styles from "./Form.module.css";
+
+const endpoint = formspreeEndpoint(PUBLIC_FORMSPREE_PICKUP_ID, "PUBLIC_FORMSPREE_PICKUP_ID");
+const items = [
+  { value: "Phones and tablets", checked: true },
+  { value: "Laptops and desktops", checked: true },
+  { value: "Servers" },
+  { value: "Monitors and TVs" },
+  { value: "Printers" },
+  { value: "Solar kits and batteries" },
+  { value: "Network equipment" },
+  { value: "Other" },
+];
+---
+
+<ComposeForm
+  id="pickup-form"
+  subject="E-waste pickup request"
+  endpoint={endpoint}
+  noun="request"
+  messageId="pickup-msg"
+>
+  <Chips label="Items" labelId="items-l" q="Items" name="items" type="checkbox" options={items} />
+  <div class={styles.row2}>
+    <div>
+      <label for="p-qty">Approximate number of items</label>
+      <input id="p-qty" name="quantity" data-q="Quantity" value="About 40" />
+    </div>
+    <div>
+      <label for="p-where">District</label>
+      <select id="p-where" name="district" data-q="District">
+        <option>Kampala</option>
+        <option>Wakiso</option>
+        <option>Mukono</option>
+        <option>Entebbe</option>
+        <option>Other</option>
+      </select>
+    </div>
+  </div>
+  <div class={styles.row2}>
+    <div>
+      <label for="p-name">Your name</label>
+      <input id="p-name" name="name" data-q="Name" required autocomplete="name" placeholder="Full name" />
+    </div>
+    <div>
+      <label for="p-org">Organisation (optional)</label>
+      <input
+        id="p-org"
+        name="organisation"
+        data-q="Organisation"
+        autocomplete="organization"
+        placeholder="School, company or group"
+      />
+    </div>
+  </div>
+  <div class={styles.row2}>
+    <div>
+      <label for="p-phone">Phone</label>
+      <input id="p-phone" type="tel" name="phone" data-q="Phone" autocomplete="tel" placeholder="+256" />
+    </div>
+    <div>
+      <label for="p-when">Preferred timing</label>
+      <select id="p-when" name="timing" data-q="Timing">
+        <option>This week</option>
+        <option>Within two weeks</option>
+        <option>This month</option>
+        <option>Flexible</option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <label for="p-msg">Anything else</label>
+    <textarea
+      id="p-msg"
+      name="notes"
+      data-q="Notes"
+      placeholder="For example: 30 desktops and 2 servers in our Ntinda office, ground floor."
+    ></textarea>
+  </div>
+</ComposeForm>

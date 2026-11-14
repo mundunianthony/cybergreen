@@ -1,0 +1,27 @@
+.contactList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.contactList li {
+  padding: 18px 0;
+  border-top: 1px solid var(--surface-200);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.contactList li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.k {
+  font: 600 0.72rem/1 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-400);
+}
+.v {
+  font-size: 1.05rem;
+  color: var(--ink);
+  user-select: all;
+}

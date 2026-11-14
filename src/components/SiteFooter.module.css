@@ -1,0 +1,81 @@
+.footer {
+  background: var(--canopy);
+  color: var(--on-dark-2);
+  padding-block: 64px 32px;
+  font-size: 0.93rem;
+}
+.footer a {
+  color: var(--on-dark-2);
+}
+.footer a:hover {
+  color: #fff;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1.2fr;
+  gap: 36px;
+}
+.grid > * {
+  min-width: 0;
+}
+.footer h4 {
+  font: 600 0.78rem/1 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-dark-3);
+  margin-bottom: 16px;
+}
+.footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo {
+  height: 76px;
+  width: auto;
+  display: block;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-dark);
+  font-size: 0.82rem;
+  color: var(--on-dark-3);
+}
+.legal {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+  font-size: 0.82rem;
+  color: var(--on-dark-3);
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+/* Matches the original, where the generic logo rule shrank the footer logo to 54px too. */
+@media (max-width: 880px) {
+  .logo {
+    height: 54px;
+  }
+}
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

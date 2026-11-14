@@ -1,0 +1,45 @@
+---
+import { PUBLIC_FORMSPREE_CONTACT_ID } from "astro:env/client";
+import { formspreeEndpoint } from "../../lib/formspree";
+import Chips from "./Chips.astro";
+import ComposeForm from "./ComposeForm.astro";
+import styles from "./Form.module.css";
+
+const endpoint = formspreeEndpoint(PUBLIC_FORMSPREE_CONTACT_ID, "PUBLIC_FORMSPREE_CONTACT_ID");
+const reasons = [
+  { value: "E-waste pickup", checked: true },
+  { value: "Data destruction" },
+  { value: "Training request" },
+  { value: "Consultancy" },
+  { value: "Research or partnership" },
+  { value: "General inquiry" },
+];
+---
+
+<ComposeForm id="contact-form" subject="Website enquiry" endpoint={endpoint} noun="message" messageId="contact-msg">
+  <Chips label="Reason for contact" labelId="r-l" q="Reason" name="reason" type="radio" options={reasons} />
+  <div class={styles.row2}>
+    <div>
+      <label for="c-name">Name</label>
+      <input id="c-name" name="name" data-q="Name" required autocomplete="name" placeholder="Full name" />
+    </div>
+    <div>
+      <label for="c-org">Organisation (optional)</label>
+      <input id="c-org" name="organisation" data-q="Organisation" autocomplete="organization" />
+    </div>
+  </div>
+  <div class={styles.row2}>
+    <div>
+      <label for="c-phone">Phone</label>
+      <input id="c-phone" type="tel" name="phone" data-q="Phone" autocomplete="tel" placeholder="+256" />
+    </div>
+    <div>
+      <label for="c-email">Email</label>
+      <input id="c-email" type="email" name="email" data-q="Email" autocomplete="email" />
+    </div>
+  </div>
+  <div>
+    <label for="c-msg">Message</label>
+    <textarea id="c-msg" name="message" data-q="Message" placeholder="How can we help?"></textarea>
+  </div>
+</ComposeForm>

@@ -1,0 +1,48 @@
+.paths {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.path {
+  padding: clamp(28px, 4vw, 44px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: var(--radius);
+}
+.a {
+  background: var(--canopy);
+  color: #fff;
+}
+.a h3 {
+  color: #fff;
+}
+.a p,
+.a li {
+  color: var(--on-dark-2);
+}
+.a > :global(.label) {
+  color: var(--circuit-300);
+}
+.b {
+  background: var(--paper);
+  border: 1px solid var(--surface-200);
+}
+.path h3 {
+  font-size: 1.7rem;
+}
+.path :global(.btn) {
+  align-self: flex-start;
+  margin-top: auto;
+}
+.path.large {
+  gap: 20px;
+}
+.path.large > h3 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+@media (max-width: 880px) {
+  .paths {
+    grid-template-columns: 1fr;
+  }
+}

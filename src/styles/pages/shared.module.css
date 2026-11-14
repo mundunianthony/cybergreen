@@ -1,0 +1,16 @@
+/* Full-size poster shown beside a text column (online safety, child online protection). */
+.poster {
+  max-width: 340px;
+  width: 100%;
+  justify-self: center;
+  align-self: center;
+}
+.poster img {
+  border-radius: var(--radius);
+  box-shadow: 0 20px 44px -12px rgba(20, 54, 32, 0.2);
+}
+
+/* Help panel on the child online protection page */
+.helpCats {
+  margin-top: 6px;
+}

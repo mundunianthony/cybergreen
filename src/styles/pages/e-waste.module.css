@@ -1,0 +1,66 @@
+/* sample certificate of data destruction */
+.cert {
+  background: var(--paper);
+  border: 1px solid var(--surface-200);
+  box-shadow: 0 30px 60px -20px rgba(20, 54, 32, 0.25);
+  padding: 28px;
+  font-size: 0.86rem;
+  position: relative;
+  transform: rotate(-1.2deg);
+  transition: transform 0.4s;
+}
+.cert:hover {
+  transform: rotate(0);
+}
+.certTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid var(--surface-200);
+  padding-bottom: 14px;
+}
+.certTop b {
+  font: 600 1.15rem/1.2 var(--display);
+  color: var(--canopy);
+}
+.sample {
+  font: 600 0.7rem/1 var(--sans);
+  letter-spacing: 0.14em;
+  color: var(--hazard);
+  border: 1.5px solid var(--hazard);
+  padding: 6px 8px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.cert table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.cert th,
+.cert td {
+  text-align: left;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--surface-200);
+}
+.cert th {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-400);
+  font-weight: 600;
+}
+.sig {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  color: var(--ink-600);
+  font-size: 0.8rem;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.tableScroll {
+  overflow-x: auto;
+}

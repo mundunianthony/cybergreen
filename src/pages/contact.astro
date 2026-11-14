@@ -1,0 +1,59 @@
+---
+import Arrow from "../components/Arrow.astro";
+import PageHero from "../components/PageHero.astro";
+import ContactForm from "../components/forms/ContactForm.astro";
+import { routes, site } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import s from "../styles/pages/contact.module.css";
+---
+
+<BaseLayout
+  title="Contact CyberGreen"
+  description="Contact CyberGreen for e-waste pickups, data destruction, training, consultancy and partnerships."
+  path={routes.contact}
+>
+  <PageHero
+    crumb="Contact"
+    title="Get in touch"
+    lead="Tell us what you need and we will come back to you within one working day. If it is urgent, calling is fastest."
+    images={[
+      { name: "leaf", alt: "Leaf with circuit veins" },
+      { name: "laptops", alt: "Retired laptops and a destruction certificate" },
+      { name: "bubbles", alt: "A conversation" },
+    ]}
+  />
+  <section>
+    <div class="wrap split">
+      <ContactForm />
+      <div class="stack g28 reveal">
+        <ul class={s.contactList}>
+          <li>
+            <span class={s.k}>Visit us</span>
+            <span class={s.v}>{site.address.venue}</span>
+            <span>{site.address.street}</span>
+            <a class="textlink" href={site.address.mapsUrl} target="_blank" rel="noopener">
+              Open in Google Maps <Arrow />
+            </a>
+          </li>
+          <li>
+            <span class={s.k}>Call or WhatsApp</span>
+            <span class={s.v}>{site.phone.display}</span>
+          </li>
+          <li>
+            <span class={s.k}>Email</span>
+            <span class={s.v}>{site.email}</span>
+          </li>
+          <li>
+            <span class={s.k}>Post</span>
+            <span class={s.v}>{site.address.postal}</span>
+          </li>
+          <li>
+            <span class={s.k}>Hours</span>
+            <span class={s.v}>{site.hours}</span>
+            <span>Community drop-off days are announced on X {site.x.handle}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

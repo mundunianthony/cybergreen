@@ -1,0 +1,71 @@
+---
+import Arrow from "../components/Arrow.astro";
+import Icon from "../components/Icon.astro";
+import PageHero from "../components/PageHero.astro";
+import { services } from "../data/services";
+import { routes } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import s from "../styles/pages/services.module.css";
+---
+
+<BaseLayout
+  title="CyberGreen services"
+  description="E-waste management, online safety training, engineering and ICT consultancy, and research."
+  path={routes.services}
+>
+  <PageHero
+    crumb="Services"
+    title="What CyberGreen does"
+    lead="Five service areas, delivered by one multidisciplinary team. The engineers who wipe your retired hardware can also train the people who use its replacement."
+    images={[
+      { name: "laptops", alt: "Retired laptops and a destruction certificate" },
+      { name: "school", alt: "Online safety lesson on a chalkboard" },
+      { name: "phone", alt: "What an old phone still stores" },
+    ]}
+  />
+  <nav class={s.subnav} aria-label="Service areas" data-subnav>
+    <div class="wrap">
+      <ul>
+        {services.map((svc) => (
+          <li>
+            <a href={`#${svc.id}`}>{svc.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+  <section>
+    <div class="wrap">
+      {services.map((svc, i) => (
+        <>
+          {i > 0 && <div class={s.divider} />}
+          <div class={s.service} id={svc.id} data-service>
+            <div class="stack g16 reveal">
+              <div class={s.kicker}>
+                <Icon name={svc.icon} class={s.ic} />
+              </div>
+              <h2>{svc.heading}</h2>
+              <p class="lead">{svc.lead}</p>
+              <p>{svc.body}</p>
+              <a class="btn btn-green self-start" href={svc.cta.href}>
+                {svc.cta.label} <Arrow />
+              </a>
+            </div>
+            <div class="stack g28 reveal">
+              {svc.lists.map((list) => (
+                <div class="stack g8">
+                  <h4>{list.heading}</h4>
+                  <ul class="plain cols2">
+                    {list.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,22 @@
+---
+import type { FaqItem } from "../data/faq";
+import styles from "./Faq.module.css";
+
+interface Props {
+  items: readonly FaqItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class:list={[styles.faq, "reveal"]}>
+  {items.map((item) => (
+    <details open={item.open}>
+      <summary>
+        {item.question}
+        <span class={styles.pm} aria-hidden="true" />
+      </summary>
+      <div class={styles.ans}>{item.answer}</div>
+    </details>
+  ))}
+</div>

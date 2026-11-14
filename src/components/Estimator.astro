@@ -1,0 +1,53 @@
+---
+import { estimatorItems } from "../data/estimator";
+import { anchors } from "../data/site";
+import { estimate, formatInteger } from "../lib/estimate";
+import Arrow from "./Arrow.astro";
+import styles from "./Estimator.module.css";
+
+// Server-render the initial result with the same function the browser uses, so the figure is
+// correct before (and without) JavaScript. The original showed "0" until its script ran.
+const initial = estimate(estimatorItems.map((item) => ({ kg: item.kg, quantity: item.initial })));
+---
+
+<div class:list={[styles.est, "reveal"]} id="estimator" data-estimator>
+  <div>
+    {estimatorItems.map((item) => {
+      const name = item.label.toLowerCase();
+      return (
+        <div class={styles.row}>
+          <label for={item.id}>{item.label}</label>
+          <div class={styles.qty}>
+            <button type="button" data-step="-1" aria-label={`Fewer ${name}`}>
+              &minus;
+            </button>
+            <input
+              id={item.id}
+              type="number"
+              min="0"
+              inputmode="numeric"
+              value={String(item.initial)}
+              data-kg={String(item.kg)}
+            />
+            <button type="button" data-step="1" aria-label={`More ${name}`}>
+              +
+            </button>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+  <div class={styles.out} aria-live="polite">
+    <span class="label">Estimated weight</span>
+    <b>
+      <span data-est-kg>{formatInteger(initial.kg)}</span> kg
+    </b>
+    <p>
+      From <span data-est-n>{formatInteger(initial.count)}</span> items. Every kilogram handled properly is a kilogram
+      that is not burnt for copper or left to leak into soil and water.
+    </p>
+    <a class="btn btn-copper self-start" href={`#${anchors.pickup}`}>
+      Book this pickup <Arrow />
+    </a>
+  </div>
+</div>

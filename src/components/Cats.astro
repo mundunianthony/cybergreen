@@ -1,0 +1,17 @@
+---
+import styles from "./Cats.module.css";
+
+interface Props {
+  /** 4 for the four-column variant used on the child online protection page. Default 3. */
+  cols?: 3 | 4;
+  /** Add the staggered scroll reveal (default true). */
+  reveal?: boolean;
+  class?: string;
+}
+
+const { cols = 3, reveal = true, class: className } = Astro.props;
+---
+
+<div class:list={[styles.cats, { [styles.cols4 ?? ""]: cols === 4, "reveal-stagger": reveal }, className]}>
+  <slot />
+</div>

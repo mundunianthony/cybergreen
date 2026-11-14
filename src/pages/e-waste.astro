@@ -1,0 +1,211 @@
+---
+import Arrow from "../components/Arrow.astro";
+import Cat from "../components/Cat.astro";
+import Cats from "../components/Cats.astro";
+import Estimator from "../components/Estimator.astro";
+import Faq from "../components/Faq.astro";
+import Marquee from "../components/Marquee.astro";
+import PageHero from "../components/PageHero.astro";
+import Steps from "../components/Steps.astro";
+import PickupForm from "../components/forms/PickupForm.astro";
+import { ewasteFaq } from "../data/faq";
+import { anchors, routes, site } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import s from "../styles/pages/e-waste.module.css";
+
+const certificateRows = [
+  ["CG-0412", "Laptop", "5CD7xxxxQ", "Overwrite, verified"],
+  ["CG-0413", "Desktop", "MXL6xxxx2", "Overwrite, verified"],
+  ["CG-0414", "Hard drive", "WCC4xxxxK", "Physical destruction"],
+  ["CG-0415", "Phone", "R58Mxxxx7", "Reset and overwrite"],
+];
+---
+
+<BaseLayout
+  title="E-waste pickup and data destruction | CyberGreen"
+  description="What we accept, how pickups work, certified data destruction, an impact estimator and a pickup request form."
+  path={routes.ewaste}
+>
+  <PageHero
+    crumb="E-waste pickup"
+    title="Clear out old electronics without leaking a single file"
+    lead="We collect retired devices from offices, schools and homes, deal with the data first, refurbish what still works and pass the rest to licensed handlers."
+    images={[
+      { name: "laptops", alt: "Retired laptops and a destruction certificate" },
+      { name: "smoke", alt: "E-waste burning in the open" },
+      { name: "grid", alt: "Share of Uganda's e-waste formally recycled" },
+    ]}
+  >
+    <Fragment slot="actions">
+      <a class="btn btn-copper" href={`#${anchors.pickup}`}>
+        Request a pickup <Arrow />
+      </a>
+      <a class="btn btn-line" href={`#${anchors.accept}`}>
+        What we accept
+      </a>
+    </Fragment>
+  </PageHero>
+  <Marquee />
+
+  <section id={anchors.accept}>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">What we accept</span>
+        <h2>Six kinds of e-waste we collect</h2>
+        <p class="lead">If it has a plug, a battery or a cable, it probably belongs here.</p>
+      </div>
+      <Cats>
+        <Cat icon="phone" title="IT and telecom">
+          <p>Phones, feature phones, tablets, laptops, desktops, servers, routers, modems, chargers and cables.</p>
+        </Cat>
+        <Cat icon="screen" title="Screens">
+          <p>Computer monitors, old CRT and flat-screen TVs, and display panels.</p>
+        </Cat>
+        <Cat icon="sun" title="Solar and power">
+          <p>Solar lanterns, solar home system panels and batteries, UPS units, inverters and power banks.</p>
+        </Cat>
+        <Cat icon="radio" title="Small electronics">
+          <p>Radios, TV decoders, speakers, cameras, printers, calculators and small household gadgets.</p>
+        </Cat>
+        <Cat icon="battery" title="Batteries" note="Never burn or puncture batteries.">
+          <p>
+            Phone and laptop batteries, lithium packs and sealed lead-acid batteries. Taped at the terminals, kept dry.
+          </p>
+        </Cat>
+        <Cat icon="bulb" title="Lamps" note="Bring tubes unbroken and wrapped.">
+          <p>Fluorescent tubes and energy-saving bulbs, which contain mercury, and LED lamps.</p>
+        </Cat>
+      </Cats>
+      <p class="source reveal">
+        Large appliances such as fridges, freezers and air conditioners contain refrigerant gases that need specialist
+        handling. Call us first and we will advise or refer you.
+      </p>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">How it works</span>
+        <h2>From your store room to a certificate</h2>
+      </div>
+      <Steps
+        items={[
+          {
+            title: "Inventory",
+            text: "We list each device with its serial number, either from your asset register or on site.",
+          },
+          {
+            title: "Collect",
+            text: "Items are packed in sealed crates. Both sides sign a chain-of-custody form at pickup.",
+          },
+          {
+            title: "Sanitise",
+            text: "Working drives are wiped and checked. Failed or locked drives are physically destroyed.",
+          },
+          {
+            title: "Recover and certify",
+            text: "Usable devices are refurbished, the rest is sorted for licensed recyclers, and you get your certificate.",
+          },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split center">
+      <div class="stack g20 reveal">
+        <span class="label">Data destruction</span>
+        <h2>Proof you can show an auditor</h2>
+        <p class="lead">
+          A factory reset is a start, not a guarantee. Under the Data Protection and Privacy Act 2019, your organisation
+          stays responsible for personal data on devices it retires.
+        </p>
+        <ul class="ticks">
+          <li>Software overwrite of working drives, verified after each job</li>
+          <li>Physical destruction of failed, encrypted or locked drives</li>
+          <li>On-site wiping where devices cannot leave your premises</li>
+          <li>A certificate per job, listing each serial number and method</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <div class={s.cert} role="img" aria-label="Sample certificate of data destruction">
+          <div class={s.certTop}>
+            <div>
+              <span class="label">CyberGreen Engineering Solutions</span>
+              <br />
+              <b>Certificate of Data Destruction</b>
+            </div>
+            <span class={s.sample}>SAMPLE</span>
+          </div>
+          <div class={s.tableScroll}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Asset tag</th>
+                  <th>Device</th>
+                  <th>Serial</th>
+                  <th>Method</th>
+                </tr>
+              </thead>
+              <tbody>
+                {certificateRows.map((row) => (
+                  <tr>
+                    {row.map((cell) => (
+                      <td>{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div class={s.sig}>
+            <span>Client: Example School, Kampala</span>
+            <span>Signed: Lead Engineer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">Estimate your impact</span>
+        <h2>How much are you keeping out of the dumpsite?</h2>
+        <p class="lead">
+          Adjust the numbers for the items in your store room. The weights are rough averages, so treat the result as a
+          guide.
+        </p>
+      </div>
+      <Estimator />
+    </div>
+  </section>
+
+  <section id={anchors.pickup}>
+    <div class="wrap split">
+      <div class="stack g20 reveal">
+        <span class="label">Request a pickup</span>
+        <h2>Tell us what you have</h2>
+        <p class="lead">
+          We cover Kampala, Wakiso and Mukono as standard, and go further for larger collections. You will hear from us
+          within one working day.
+        </p>
+        <p>
+          Prefer to talk? Call or WhatsApp <b>{site.phone.display}</b>.
+        </p>
+      </div>
+      <PickupForm />
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="wrap split">
+      <div class="sec-head reveal">
+        <span class="label">Questions</span>
+        <h2>Things people ask us</h2>
+      </div>
+      <Faq items={ewasteFaq} />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,77 @@
+.values {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--surface-200);
+  border: 1px solid var(--surface-200);
+}
+.value {
+  background: var(--paper);
+  padding: 26px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.value p {
+  color: var(--ink-600);
+  font-size: 0.93rem;
+}
+.leader {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: clamp(24px, 5vw, 56px);
+  align-items: start;
+}
+.leader > * {
+  min-width: 0;
+}
+.portrait {
+  aspect-ratio: 4/5;
+  max-width: 100%;
+  background: var(--canopy);
+  border-radius: var(--radius);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.portrait::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/img/traces.svg");
+  background-size: 300px;
+  opacity: 0.18;
+}
+.portrait span {
+  position: relative;
+  font: 600 4rem/1 var(--display);
+  color: var(--circuit-300);
+}
+.portrait small {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--on-dark-3);
+}
+@media (max-width: 1000px) {
+  .values {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 880px) {
+  .leader {
+    grid-template-columns: 1fr;
+  }
+  .portrait {
+    max-width: 220px;
+  }
+}
+@media (max-width: 560px) {
+  .values {
+    grid-template-columns: 1fr;
+  }
+}

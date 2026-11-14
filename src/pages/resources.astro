@@ -1,0 +1,160 @@
+---
+import Checklist from "../components/Checklist.astro";
+import PageHero from "../components/PageHero.astro";
+import { posterSrc, posters } from "../data/posters";
+import { routes } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import s from "../styles/pages/resources.module.css";
+
+const impacts = [
+  {
+    title: "Soil",
+    text: "Heavy metals such as lead and cadmium leach into the ground and reduce its ability to support crops.",
+  },
+  { title: "Water", text: "Rain carries contaminants from dumpsites into drains, streams, wetlands and groundwater." },
+  { title: "Air", text: "Burning cables and circuit boards for copper releases fumes linked to respiratory illness." },
+  { title: "Health", text: "Informal dismantlers, nearby families and children face the highest exposure." },
+];
+
+const sources = [
+  {
+    href: "https://www.itu.int/en/ITU-D/Environment/Pages/Publications/The-Global-E-waste-Monitor-2024.aspx",
+    title: "The Global E-waste Monitor 2024",
+    publisher: "ITU and UNITAR",
+  },
+  {
+    href: "https://ict.go.ug/media/articles/tackling-ugandas-growing-ict-e-waste-challenge",
+    title: "Tackling Uganda's growing ICT e-waste challenge",
+    publisher: "Ministry of ICT and National Guidance",
+  },
+  {
+    href: "https://ict.go.ug/media/news/building-a-secure-digital-uganda",
+    title: "Building a secure digital Uganda",
+    publisher: "Ministry of ICT and National Guidance",
+  },
+  {
+    href: "https://www.itu.int/pub/D-UGA-EWASTE-2024",
+    title: "E-waste management under extended producer responsibility in Uganda",
+    publisher: "ITU",
+  },
+  {
+    href: "https://www.who.int/publications/i/item/9789240023901",
+    title: "Children and digital dumpsites",
+    publisher: "World Health Organization",
+  },
+];
+---
+
+<BaseLayout
+  title="Posters and guides | CyberGreen"
+  description="Free posters and quick guides on e-waste and online safety, with sources."
+  path={routes.resources}
+>
+  <PageHero
+    crumb="Resources"
+    title="Learn it, teach it, pass it on"
+    lead="Everything here is free to use in a classroom, a staff meeting, a church notice board or at home. Please keep our logo on the posters."
+    images={[
+      { name: "phone", alt: "What an old phone still stores" },
+      { name: "pin", alt: "A mobile money PIN pad" },
+      { name: "bubbles", alt: "A parent asking a child about their day online" },
+    ]}
+  />
+  <section>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">Awareness posters</span>
+        <h2>One message per poster</h2>
+      </div>
+      <div class:list={[s.gallery, "reveal-stagger"]}>
+        {posters.map((poster) => {
+          const full = posterSrc(poster.slug);
+          return (
+            <figure>
+              <div class={s.im}>
+                <a href={full} target="_blank" rel="noopener">
+                  <img loading="lazy" src={posterSrc(poster.slug, "sm")} alt={poster.alt} width="540" height="675" />
+                </a>
+              </div>
+              <figcaption>
+                <span>{poster.title}</span>
+                <a href={full} download>
+                  Download
+                </a>
+              </figcaption>
+            </figure>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="wrap split">
+      <div class="stack g16 reveal">
+        <span class="label">Quick guide</span>
+        <h2>Before you sell, donate or recycle a phone</h2>
+        <p class="lead">Five minutes now protects your photos, contacts and mobile money.</p>
+      </div>
+      <Checklist
+        class="reveal"
+        items={[
+          { title: "Back up", text: "Save photos, contacts and documents to another device or a cloud account." },
+          {
+            title: "Sign out of everything",
+            text: "Google or Apple account, WhatsApp, email, social media and banking apps.",
+          },
+          { title: "Remove the SIM and memory card", text: "Your mobile money and your number travel with the SIM." },
+          {
+            title: "Factory reset",
+            text: "Use the phone's own reset option. On most modern phones this also encrypts what is left.",
+          },
+          {
+            title: "Hand it on safely",
+            text: "Pass working phones to someone who needs one, and dead ones to a certified collector.",
+          },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">E-waste hazards</span>
+        <h2>Why the pile in the store room matters</h2>
+        <p class="lead">
+          When electronics are dumped or burnt, toxic substances reach people and the environment. The World Health
+          Organization warns that children and pregnant women are especially vulnerable to them.
+        </p>
+      </div>
+      <div class:list={[s.impacts, "reveal-stagger"]}>
+        {impacts.map((impact) => (
+          <div class={s.impact}>
+            <h3>{impact.title}</h3>
+            <p>{impact.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="wrap split">
+      <div class="sec-head reveal">
+        <span class="label">Sources</span>
+        <h2>Where our figures come from</h2>
+      </div>
+      <ul class:list={[s.sources, "reveal"]}>
+        {sources.map((source) => (
+          <li>
+            <a href={source.href} target="_blank" rel="noopener">
+              {source.title}
+            </a>
+            , {source.publisher}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

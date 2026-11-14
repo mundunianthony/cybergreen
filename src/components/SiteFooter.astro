@@ -1,0 +1,71 @@
+---
+import { footerNav, routes, site } from "../data/site";
+import { serviceHref, services } from "../data/services";
+import styles from "./SiteFooter.module.css";
+
+const year = new Date().getFullYear();
+---
+
+<footer class={styles.footer}>
+  <div class="wrap">
+    <div class={styles.grid}>
+      <div class="stack g16">
+        <a class={styles.brand} href={routes.home}>
+          <img class={styles.logo} src="/assets/img/logo-dark.png" alt={site.logoAlt} width="480" height="209" />
+        </a>
+        <p>{site.description}</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          {footerNav.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          {services.map((s) => (
+            <li>
+              <a href={serviceHref(s.id)}>{s.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>
+            {site.address.venue}, {site.address.street}
+          </li>
+          <li>{site.address.postal}</li>
+          <li>
+            <a href={`tel:${site.phone.tel}`}>{site.phone.display}</a>
+          </li>
+          <li>
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </li>
+          <li>
+            <a href={site.x.url} target="_blank" rel="noopener">
+              X: {site.x.handle}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class={styles.tags}>
+      {site.hashtags.map((tag) => (
+        <span>{tag}</span>
+      ))}
+    </div>
+    <div class={styles.legal}>
+      <span>
+        &copy; <span data-year>{year}</span> {site.legalName}. All rights reserved.
+      </span>
+      <span>{site.displayDomain}</span>
+    </div>
+  </div>
+</footer>

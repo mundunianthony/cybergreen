@@ -1,0 +1,240 @@
+---
+import Arrow from "../components/Arrow.astro";
+import Cat from "../components/Cat.astro";
+import Cats from "../components/Cats.astro";
+import Checklist from "../components/Checklist.astro";
+import Frame from "../components/Frame.astro";
+import PageHero from "../components/PageHero.astro";
+import Path from "../components/Path.astro";
+import Stats from "../components/Stats.astro";
+import { posterSrc } from "../data/posters";
+import { anchors, routes } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import s from "../styles/pages/shared.module.css";
+---
+
+<BaseLayout
+  title="Child online protection | CyberGreen"
+  description="Child online protection programmes for schools, parents and child-focused organisations in Uganda, with guidance on where to get help."
+  path={routes.childProtection}
+>
+  <PageHero
+    crumb="Child online protection"
+    title="Helping children grow up safe online"
+    lead="More Ugandan children are online every year, on shared phones, in cybercafes and in school labs. We help schools, parents, caregivers and child-focused organisations protect them from online abuse, exploitation and harm."
+    images={[
+      { name: "bubbles", alt: "A parent asking a child about their day online" },
+      { name: "posts", alt: "Social media posts being shared" },
+      { name: "school", alt: "Online safety lesson on a chalkboard" },
+    ]}
+  >
+    <Fragment slot="actions">
+      <a class="btn btn-copper" href={routes.contact}>
+        Book a programme <Arrow />
+      </a>
+      <a class="btn btn-line" href={`#${anchors.help}`}>
+        If a child is at risk
+      </a>
+    </Fragment>
+  </PageHero>
+  <section class="dark">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">What the research shows</span>
+        <h2>Children are online. Many face harm and tell no one.</h2>
+        <p class="lead">
+          Findings from Disrupting Harm in Uganda, a national household survey of internet-using children aged 12 to 17
+          and their caregivers.
+        </p>
+      </div>
+      <Stats
+        items={[
+          {
+            display: "40",
+            count: "40",
+            unit: "%",
+            text: "Of 12 to 17 year olds in Uganda use the internet, more than half of them every day",
+          },
+          {
+            display: "10",
+            count: "10",
+            unit: "%",
+            text: "Were offered money or gifts for sexual images of themselves in the past year",
+          },
+          { display: "9", count: "9", unit: "%", text: "Had sexual images of themselves shared without their consent" },
+          { display: "1 in 5", text: "Cases involved a stranger. Most offenders were someone the child already knew" },
+        ]}
+      />
+      <p class="source">
+        Source: Disrupting Harm in Uganda (ECPAT, INTERPOL and UNICEF Office of Research, 2021), with figures as
+        reported by ECPAT and UNICEF Uganda.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">The risks</span>
+        <h2>What children meet online</h2>
+        <p class="lead">
+          Most of these happen on everyday apps such as WhatsApp, Facebook and Messenger, not on the dark corners of the
+          internet.
+        </p>
+      </div>
+      <Cats cols={4}>
+        <Cat title="Grooming and sextortion">
+          <p>
+            An adult builds trust, asks for images, then threatens to share them unless the child sends more or pays.
+          </p>
+        </Cat>
+        <Cat title="Cyberbullying">
+          <p>Insults, rumours and humiliating photos that follow a child home from school, day and night.</p>
+        </Cat>
+        <Cat title="Harmful content">
+          <p>Violence, pornography, self-harm and false information that children are not ready to process.</p>
+        </Cat>
+        <Cat title="Privacy and scams">
+          <p>
+            Oversharing location, school or family details, and fake offers that target young people's phones and mobile
+            money.
+          </p>
+        </Cat>
+      </Cats>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">What we offer</span>
+        <h2>Child online protection programmes</h2>
+        <p class="lead">
+          Our work follows the ITU Guidelines on Child Online Protection, which set out roles for children, parents,
+          educators, industry and government, adapted to Ugandan homes and schools.
+        </p>
+      </div>
+      <Cats>
+        <Cat icon="cap" title="School programmes">
+          <p>
+            Age-appropriate sessions for learners on privacy, consent, bullying and asking for help, run across a full
+            term.
+          </p>
+        </Cat>
+        <Cat icon="book" title="Teacher and counsellor training">
+          <p>
+            How to spot warning signs, respond to a disclosure without making things worse, and refer cases correctly.
+          </p>
+        </Cat>
+        <Cat icon="people" title="Parent and caregiver sessions">
+          <p>Practical guidance on phones, games and social media, and how to keep children talking to you.</p>
+        </Cat>
+        <Cat icon="shield" title="Safeguarding policies">
+          <p>
+            Online safety and safeguarding policies for schools, children's homes, churches, NGOs and youth programmes.
+          </p>
+        </Cat>
+        <Cat icon="phoneText" title="Learning materials and clubs">
+          <p>Posters, activity sheets and Digital Safety Clubs led by trained student leaders.</p>
+        </Cat>
+        <Cat icon="chip" title="Campaigns and research">
+          <p>
+            Community and radio campaigns with partners, and research on how Ugandan children actually use the internet.
+          </p>
+        </Cat>
+      </Cats>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split center">
+      <div class="stack g20 reveal">
+        <span class="label">For parents and caregivers</span>
+        <h2>Five habits that protect children</h2>
+        <Checklist
+          items={[
+            {
+              title: "Talk early and often",
+              text: "Ask what they did online today, the same way you ask about school.",
+            },
+            { title: "Keep devices in shared spaces", text: "Especially at night. Charge phones outside bedrooms." },
+            { title: "Learn the apps they use", text: "Set privacy settings together and check who can contact them." },
+            {
+              title: "Stay calm if they tell you something",
+              text: "Thank them for telling you. Children who are punished stop telling.",
+            },
+            {
+              title: "Keep evidence, never forward images",
+              text: "Note usernames and dates, then report. Sharing abuse images, even to report them, can cause further harm.",
+            },
+          ]}
+        />
+      </div>
+      <div class:list={[s.poster, "reveal"]}>
+        <img
+          src={posterSrc("06_think_before_you_post")}
+          alt="Poster: Think before you post"
+          width="1080"
+          height="1350"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">How we work with children</span>
+        <h2>Our safeguarding commitments</h2>
+      </div>
+      <Frame>
+        <div>
+          <h4>Code of conduct</h4>
+          <p>Every trainer signs our child protection policy and code of conduct before working with children.</p>
+        </div>
+        <div>
+          <h4>Never alone</h4>
+          <p>Sessions with learners always run with a teacher or responsible adult present.</p>
+        </div>
+        <div>
+          <h4>Consent for images</h4>
+          <p>We only take photos with written consent from the school and never publish children's names.</p>
+        </div>
+        <div>
+          <h4>Clear referrals</h4>
+          <p>Any disclosure goes to the school's designated safeguarding lead and the right authorities.</p>
+        </div>
+      </Frame>
+    </div>
+  </section>
+
+  <section id={anchors.help}>
+    <div class="wrap">
+      <Path variant="a" large class="reveal">
+        <span class="label">If a child is at risk</span>
+        <h3>Get help straight away</h3>
+        <Cats reveal={false} class={s.helpCats}>
+          <Cat title="Sauti 116" variant="dark">
+            <p>
+              Uganda's free national child helpline, run by the Ministry of Gender, Labour and Social Development. Call
+              116, any time of day or night.
+            </p>
+          </Cat>
+          <Cat title="Police" variant="dark">
+            <p>
+              Report to the Child and Family Protection Unit at your nearest police station. In an emergency, call 999
+              or 112.
+            </p>
+          </Cat>
+          <Cat title="The platform" variant="dark">
+            <p>
+              Use the report button on WhatsApp, Facebook, TikTok or Instagram, and block the account after saving the
+              details.
+            </p>
+          </Cat>
+        </Cats>
+      </Path>
+    </div>
+  </section>
+</BaseLayout>

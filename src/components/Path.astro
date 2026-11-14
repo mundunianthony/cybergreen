@@ -1,0 +1,17 @@
+---
+import styles from "./Path.module.css";
+
+interface Props {
+  /** "a": dark canopy panel. "b": white panel with a border. */
+  variant: "a" | "b";
+  /** Larger heading and gap, used for the "If a child is at risk" panel. */
+  large?: boolean;
+  class?: string;
+}
+
+const { variant, large = false, class: className } = Astro.props;
+---
+
+<div class:list={[styles.path, styles[variant], { [styles.large ?? ""]: large }, className]}>
+  <slot />
+</div>

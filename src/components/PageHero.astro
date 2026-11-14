@@ -1,0 +1,57 @@
+---
+import { routes } from "../data/site";
+import styles from "./PageHero.module.css";
+
+export type HeroImageName = "bubbles" | "grid" | "laptops" | "leaf" | "phone" | "pin" | "posts" | "school" | "smoke";
+
+interface HeroImage {
+  name: HeroImageName;
+  alt: string;
+}
+
+interface Props {
+  /** Current page name shown in the breadcrumb. */
+  crumb: string;
+  title: string;
+  lead: string;
+  /** Exactly three illustrations, crossfaded every five seconds. */
+  images: readonly [HeroImage, HeroImage, HeroImage];
+}
+
+const { crumb, title, lead, images } = Astro.props;
+const hasActions = Astro.slots.has("actions");
+---
+
+<section class={styles.hero}>
+  <div class:list={["wrap", styles.grid]}>
+    <div class="stack g20">
+      <div class:list={[styles.crumbs, "rise"]}>
+        <a href={routes.home}>Home</a> / {crumb}
+      </div>
+      <h1 class="rise d1">{title}</h1>
+      <p class="lead rise d2">{lead}</p>
+      {hasActions && (
+        <div class="btns rise d3">
+          <slot name="actions" />
+        </div>
+      )}
+    </div>
+    <div class:list={[styles.fader, "rise d2"]} role="group" aria-label="Illustrations">
+      {images.map((img, i) => (
+        <img
+          src={`/assets/hero/${img.name}.png`}
+          alt={img.alt}
+          width="960"
+          height="720"
+          loading={i === 0 ? undefined : "lazy"}
+          data-hero={img.name}
+        />
+      ))}
+      <span class={styles.dots} aria-hidden="true">
+        <i></i>
+        <i></i>
+        <i></i>
+      </span>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+.targets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line-dark);
+}
+.target {
+  background: var(--canopy);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.target b {
+  font: 600 2.4rem/1 var(--display);
+  color: var(--circuit-300);
+}
+.target p {
+  font-size: 0.97rem;
+}
+@media (max-width: 880px) {
+  .targets {
+    grid-template-columns: 1fr;
+  }
+}

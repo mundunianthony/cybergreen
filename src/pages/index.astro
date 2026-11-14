@@ -1,0 +1,443 @@
+---
+import Arrow from "../components/Arrow.astro";
+import Icon from "../components/Icon.astro";
+import Marquee from "../components/Marquee.astro";
+import Path from "../components/Path.astro";
+import Paths from "../components/Paths.astro";
+import Stats from "../components/Stats.astro";
+import Steps from "../components/Steps.astro";
+import Targets from "../components/Targets.astro";
+import { posterSrc, getPoster } from "../data/posters";
+import { serviceHref, services } from "../data/services";
+import { anchors, routes, site } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import s from "../styles/pages/home.module.css";
+
+const pickupHref = `${routes.ewaste}#${anchors.pickup}`;
+const acceptHref = `${routes.ewaste}#${anchors.accept}`;
+const cards = services.flatMap((svc) => (svc.card ? [{ ...svc, card: svc.card }] : []));
+const posterRow = (
+  ["02_dont_dump_it", "04_old_phone_remembers", "06_think_before_you_post", "08_your_pin_is_yours"] as const
+).map(getPoster);
+
+const organisationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.legalName,
+  alternateName: site.name,
+  url: site.url,
+  logo: new URL("/assets/img/logo-dark.png", site.url).href,
+  email: site.email,
+  telephone: site.phone.tel,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: `${site.address.venue}, Old Portbell Road, Nakawa`,
+    addressLocality: "Kampala",
+    addressCountry: "UG",
+  },
+  sameAs: [site.x.url],
+};
+---
+
+<BaseLayout
+  title="CyberGreen | E-waste and online safety in Uganda"
+  description="CyberGreen collects and responsibly handles e-waste, securely destroys data and runs online safety training for schools, families and organisations in Uganda."
+  path={routes.home}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(organisationJsonLd)} />
+  <section class={s.hero}>
+    <div class:list={["wrap", s.heroGrid]}>
+      <div>
+        <p class="eyebrow rise">CyberGreen Engineering Solutions Co. Ltd</p>
+        <h1 class="rise d1">Safer digital lives. Sustainable futures.</h1>
+        <p class="lead rise d2">
+          We keep Uganda's discarded electronics out of drains, dumpsites and open fires, wipe the data they still
+          carry, and help the people using today's devices stay safe online.
+        </p>
+        <div class="btns rise d3">
+          <a class="btn btn-copper" href={pickupHref}>
+            Arrange an e-waste pickup <Arrow />
+          </a>
+          <a class="btn btn-line" href={routes.services}>
+            Explore our services
+          </a>
+        </div>
+      </div>
+      <svg
+        class={s.heroArt}
+        viewBox="0 0 220 220"
+        role="img"
+        aria-label="A leaf whose veins are drawn as circuit board traces"
+      >
+        <circle cx="110" cy="112" r="96" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1"></circle>
+        <circle
+          cx="110"
+          cy="112"
+          r="76"
+          fill="none"
+          stroke="rgba(255,255,255,.06)"
+          stroke-width="1"
+          stroke-dasharray="3 6"
+        ></circle>
+        <circle cx="40" cy="60" r="2" fill="#6ec46f" class={s.spark} style="animation-delay:0s"></circle>
+        <circle cx="190" cy="160" r="2" fill="#6ec46f" class={s.spark} style="animation-delay:0.8s"></circle>
+        <circle cx="30" cy="130" r="2" fill="#6ec46f" class={s.spark} style="animation-delay:1.6s"></circle>
+        <circle cx="176" cy="30" r="2" fill="#6ec46f" class={s.spark} style="animation-delay:2.2s"></circle>
+        <path
+          d="M52 188 C 40 120, 78 44, 168 34 C 178 118, 130 178, 52 188 Z"
+          fill="rgba(47,116,51,.22)"
+          stroke="#6ec46f"
+          stroke-width="2.4"
+          stroke-linejoin="round"
+          class={s.drawLeaf}
+        ></path>
+        <path
+          d="M52 188 C 92 150, 128 104, 160 52"
+          fill="none"
+          stroke="#c98f3a"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          class={s.drawTrace}
+          style="stroke-dasharray:190;stroke-dashoffset:190;animation-delay:0.95s"
+        ></path>
+        <path
+          d="M96 140 L 148 128"
+          fill="none"
+          stroke="#c98f3a"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          class={s.drawTrace}
+          style="stroke-dasharray:54;stroke-dashoffset:54;animation-delay:1.1s"
+        ></path>
+        <path
+          d="M120 108 L 126 66"
+          fill="none"
+          stroke="#c98f3a"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          class={s.drawTrace}
+          style="stroke-dasharray:43;stroke-dashoffset:43;animation-delay:1.2s"
+        ></path>
+        <path
+          d="M76 160 L 62 118"
+          fill="none"
+          stroke="#c98f3a"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          class={s.drawTrace}
+          style="stroke-dasharray:45;stroke-dashoffset:45;animation-delay:1.3s"
+        ></path>
+        <path
+          d="M140 78 L 178 84"
+          fill="none"
+          stroke="#c98f3a"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          class={s.drawTrace}
+          style="stroke-dasharray:39;stroke-dashoffset:39;animation-delay:1.4s"
+        ></path>
+        <circle
+          cx="148"
+          cy="128"
+          r="5"
+          fill="#c98f3a"
+          class={s.pop}
+          style="transform-origin:148px 128px;animation-delay:1.4s"
+        ></circle>
+        <circle
+          cx="126"
+          cy="66"
+          r="5"
+          fill="#c98f3a"
+          class={s.pop}
+          style="transform-origin:126px 66px;animation-delay:1.5s"
+        ></circle>
+        <circle
+          cx="62"
+          cy="118"
+          r="5"
+          fill="#c98f3a"
+          class={s.pop}
+          style="transform-origin:62px 118px;animation-delay:1.6s"
+        ></circle>
+        <circle
+          cx="178"
+          cy="84"
+          r="5"
+          fill="#c98f3a"
+          class={s.pop}
+          style="transform-origin:178px 84px;animation-delay:1.7s"
+        ></circle>
+      </svg>
+    </div>
+  </section>
+  <Marquee />
+
+  <section>
+    <div class="wrap split">
+      <p class:list={[s.statement, "reveal"]}>
+        The same old phone can <em>poison a stream</em> and <em>leak a family's mobile money records.</em> We deal with
+        both.
+      </p>
+      <div class="stack g20 reveal">
+        <p class="lead">
+          Uganda is connecting fast. More phones, more laptops in schools and offices, more solar kits in homes, and
+          more people paying, learning and working online. That growth brings two problems that land on the same
+          households and institutions.
+        </p>
+        <p>
+          Retired devices pile up in store rooms or end up with informal dismantlers who burn cables for copper. And
+          while new users come online every day, few of them get any guidance on scams, privacy or how to protect
+          children. CyberGreen brings engineers, trainers and community educators together to work on both.
+        </p>
+        <a class="textlink" href={routes.about}>
+          About CyberGreen <Arrow />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">What we do</span>
+        <h2>What CyberGreen does</h2>
+      </div>
+      <div class:list={[s.cards, "reveal-stagger"]}>
+        {cards.map((svc) => (
+          <a class={s.card} href={serviceHref(svc.id)}>
+            <span class={s.num}>{svc.card.num}</span>
+            <Icon name={svc.icon} class={s.ic} />
+            <h3>{svc.label}</h3>
+            <p>{svc.card.text}</p>
+            <span class="textlink">
+              Learn more <Arrow />
+            </span>
+          </a>
+        ))}
+      </div>
+      <div class:list={[s.feature, "reveal"]}>
+        <div class="stack g16">
+          <span class="label">05 &nbsp;Child online protection</span>
+          <h3>Keeping children safe as they come online</h3>
+          <p>
+            Programmes that help schools, parents, caregivers and child-focused organisations prevent online abuse, spot
+            the warning signs early and respond the right way when something goes wrong. Built on the ITU Child Online
+            Protection guidelines and Uganda's own referral pathways.
+          </p>
+          <ul class="ticks">
+            <li>School programmes and teacher training</li>
+            <li>Parent and caregiver sessions</li>
+            <li>Safeguarding and online safety policies</li>
+          </ul>
+          <a class="btn btn-copper self-start" href={routes.childProtection}>
+            Explore child online protection <Arrow />
+          </a>
+        </div>
+        <img
+          src={posterSrc("07_ask_your_child", "sm")}
+          alt="Poster: Ask what they did online today"
+          width="540"
+          height="675"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">The scale of it</span>
+        <h2>Uganda discarded about 41,000 tonnes of electronics in 2022.</h2>
+        <p class="lead">
+          Only a sliver of that reached a formal recycler. The pattern is similar across the continent.
+        </p>
+      </div>
+      <Stats
+        items={[
+          { display: "41,000", count: "41000", unit: "t", text: "E-waste generated in Uganda in 2022" },
+          { display: "200", count: "200", unit: "t", text: "Formally collected and recycled in Uganda the same year" },
+          { display: "<1", unit: "%", text: "Of Africa's e-waste documented as formally collected and recycled" },
+          {
+            display: "UGX 72",
+            count: "72",
+            prefix: "UGX ",
+            unit: "bn",
+            text: "Taken from Ugandans by cybercriminals in 2024",
+          },
+        ]}
+      />
+      <p class="source">
+        Sources: UN Global E-waste Monitor 2024 (ITU and UNITAR); Criminal Investigations Directorate, as reported by
+        the Ministry of ICT and National Guidance.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">E-waste pickup</span>
+        <h2>Three steps from your store room to a certificate</h2>
+      </div>
+      <Steps
+        items={[
+          {
+            title: "Request",
+            text: "Tell us what you have, roughly how many and where. A phone call, WhatsApp message or the pickup form all work.",
+          },
+          {
+            title: "Collect",
+            text: "We count and tag items on site, pack them in sealed crates and sign a handover form with you.",
+          },
+          {
+            title: "Certify",
+            text: "Data is wiped or the storage destroyed, and you receive a certificate listing every serial number.",
+          },
+        ]}
+      />
+      <div class:list={["btns reveal", s.stepsBtns]}>
+        <a class="btn btn-green" href={pickupHref}>
+          Request a pickup <Arrow />
+        </a>
+        <a class="btn btn-line-dark" href={acceptHref}>
+          See what we accept
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">Choose your path</span>
+        <h2>Whether you run an institution or a household</h2>
+      </div>
+      <Paths>
+        <Path variant="a">
+          <span class="label">Institutions</span>
+          <h3>Schools, hospitals, banks, SACCOs, government and NGOs</h3>
+          <p>For organisations retiring computers, servers and phones that hold personal data.</p>
+          <ul class="ticks">
+            <li>Inventory by serial number</li>
+            <li>Secure collection and chain of custody</li>
+            <li>Data wiping or physical destruction, with a certificate</li>
+            <li>Weight report for sustainability reporting</li>
+          </ul>
+          <a class="btn btn-copper" href={pickupHref}>
+            Book an institutional pickup <Arrow />
+          </a>
+        </Path>
+        <Path variant="b">
+          <span class="label">Homes and communities</span>
+          <h3>Families, small shops, churches, youth groups and estates</h3>
+          <p>For a handful of old phones, chargers, radios or a dead solar battery.</p>
+          <ul class="ticks">
+            <li>Community drop-off days in Kampala, Wakiso and Mukono</li>
+            <li>Phone wiping before you sell or pass one on</li>
+            <li>School and parish collection drives</li>
+            <li>Simple advice on what to repair and what to recycle</li>
+          </ul>
+          <a class="btn btn-line-dark" href={acceptHref}>
+            What you can bring
+          </a>
+        </Path>
+      </Paths>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split center">
+      <div class="stack g20 reveal">
+        <span class="label">Inside a phone</span>
+        <h2>Worth recovering. Dangerous to burn.</h2>
+        <p class="lead">
+          A single smartphone holds dozens of different elements. Some are valuable and can be recovered for reuse.
+          Others are toxic when a device is broken open or burnt in the open air.
+        </p>
+        <p>
+          That is why we refurbish what still works, dismantle the rest carefully and pass materials to licensed
+          handlers, instead of letting them end up on a dumpsite fire.
+        </p>
+      </div>
+      <div class:list={[s.elements, "reveal-stagger"]}>
+        <div class={s.elGroup}>
+          <h4>Worth recovering</h4>
+          <div class={s.elRow}>
+            {[
+              ["79", "Au", "Gold"],
+              ["29", "Cu", "Copper"],
+              ["47", "Ag", "Silver"],
+              ["27", "Co", "Cobalt"],
+              ["3", "Li", "Lithium"],
+            ].map(([n, sym, name]) => (
+              <div class:list={[s.el, s.val]}>
+                <small>{n}</small>
+                <b>{sym}</b>
+                <span>{name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class={s.elGroup}>
+          <h4>Harmful if burnt or dumped</h4>
+          <div class={s.elRow}>
+            {[
+              ["82", "Pb", "Lead"],
+              ["80", "Hg", "Mercury"],
+              ["48", "Cd", "Cadmium"],
+              ["35", "Br", "Brominated flame retardants"],
+            ].map(([n, sym, name]) => (
+              <div class:list={[s.el, s.tox]}>
+                <small>{n}</small>
+                <b>{sym}</b>
+                <span>{name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">What we are working towards</span>
+        <h2>Targets for our first years</h2>
+      </div>
+      <Targets
+        items={[
+          { title: "10+ t", text: "Of e-waste diverted from dumpsites and landfill every year." },
+          { title: "5,000+", text: "People trained in online safety and cybersecurity awareness." },
+          { title: "Schools", text: "Supported to run their own digital safety programmes and clubs." },
+          { title: "ICT assets", text: "Retired securely by institutions, with every drive accounted for." },
+          { title: "Green jobs", text: "For young technicians trained in safe repair, refurbishment and handling." },
+          { title: "Policy", text: "Evidence that helps Uganda's e-waste and digital resilience agenda move faster." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class:list={["sec-head reveal", s.secHeadRow]}>
+        <div class="stack g12">
+          <span class="label">Free to print and share</span>
+          <h2>Posters for your notice board</h2>
+        </div>
+        <a class="textlink" href={routes.resources}>
+          All posters and guides <Arrow />
+        </a>
+      </div>
+      <div class:list={[s.posterRow, "reveal-stagger"]}>
+        {posterRow.map((poster) => (
+          <a href={routes.resources}>
+            <img loading="lazy" src={posterSrc(poster.slug, "sm")} alt={poster.alt} width="540" height="675" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

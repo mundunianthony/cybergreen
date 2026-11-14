@@ -1,0 +1,198 @@
+/* Inner-page hero with crossfading illustrations */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--canopy);
+  color: #fff;
+  padding-block: clamp(56px, 8vw, 96px);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/img/traces.svg");
+  background-size: 520px;
+  opacity: 0.12;
+}
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+.grid > * {
+  min-width: 0;
+}
+.hero h1 {
+  color: #fff;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  max-width: 18ch;
+}
+.hero :global(.lead) {
+  color: var(--on-dark-2);
+  max-width: 60ch;
+}
+.crumbs {
+  font-size: 0.85rem;
+  color: var(--on-dark-3);
+}
+.crumbs a,
+.crumbs a:hover {
+  color: var(--on-dark-2);
+}
+
+.fader {
+  position: relative;
+  aspect-ratio: 4/3;
+  width: 100%;
+  max-width: min(520px, 100%);
+  justify-self: end;
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(255, 255, 255, 0.06), transparent 70%);
+  border-radius: 12px;
+}
+.fader img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  --img-scale: 1;
+  --img-x: 0%;
+  --img-y: 0%;
+  animation: fadecycle 15s infinite;
+}
+
+/* Per-image corrections: scale up sparse illustrations, reposition off-centre ones */
+.fader img[data-hero="grid"] {
+  --img-scale: 2.6;
+  --img-y: 8%;
+}
+.fader img[data-hero="smoke"] {
+  --img-scale: 1.5;
+  --img-y: -14%;
+}
+.fader img[data-hero="pin"] {
+  --img-scale: 1.2;
+  --img-y: 4%;
+}
+.fader img[data-hero="leaf"] {
+  --img-scale: 1.12;
+}
+.fader img:nth-child(1) {
+  opacity: 1;
+  animation-delay: 0s;
+  animation-name: fadefirst;
+}
+.fader img:nth-child(2) {
+  animation-delay: 5s;
+}
+.fader img:nth-child(3) {
+  animation-delay: 10s;
+}
+@keyframes fadecycle {
+  0% {
+    opacity: 0;
+    transform: scale(calc(var(--img-scale) * 1.04)) translate(var(--img-x), var(--img-y));
+  }
+  6% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+    transform: scale(var(--img-scale)) translate(var(--img-x), var(--img-y));
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadefirst {
+  0% {
+    opacity: 1;
+    transform: scale(var(--img-scale)) translate(var(--img-x), var(--img-y));
+  }
+  33% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  94% {
+    opacity: 0;
+    transform: scale(calc(var(--img-scale) * 1.04)) translate(var(--img-x), var(--img-y));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(var(--img-scale)) translate(var(--img-x), var(--img-y));
+  }
+}
+.dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -6px;
+  display: flex;
+  gap: 6px;
+}
+.dots i {
+  width: 22px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+.dots i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: dotfill 15s linear infinite;
+}
+.dots i:nth-child(2)::after {
+  animation-delay: 5s;
+}
+.dots i:nth-child(3)::after {
+  animation-delay: 10s;
+}
+@keyframes dotfill {
+  0% {
+    transform: scaleX(0);
+  }
+  33.3% {
+    transform: scaleX(1);
+  }
+  33.4%,
+  100% {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fader img {
+    animation: none !important;
+    opacity: 0;
+    transform: scale(var(--img-scale)) translate(var(--img-x), var(--img-y));
+  }
+  .fader img:nth-child(1) {
+    opacity: 1;
+  }
+  .dots {
+    display: none;
+  }
+}
+@media (max-width: 880px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .fader {
+    justify-self: start;
+    max-width: min(420px, 100%);
+  }
+}

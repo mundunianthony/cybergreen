@@ -1,0 +1,152 @@
+.panel {
+  background: var(--paper);
+  border: 1px solid var(--surface-200);
+  padding: clamp(24px, 4vw, 40px);
+  border-radius: var(--radius);
+}
+.form {
+  display: grid;
+  gap: 18px;
+}
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.row2 > * {
+  min-width: 0;
+}
+.form label,
+.form .lbl {
+  display: block;
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-bottom: 7px;
+  color: var(--ink);
+}
+.form input,
+.form select,
+.form textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  padding: 13px 14px;
+  border: 1.5px solid #cfd8cb;
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+  outline: none;
+  border-color: var(--signal);
+  box-shadow: 0 0 0 3px rgba(47, 116, 51, 0.18);
+}
+.form textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+.submit {
+  justify-self: start;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  position: relative;
+}
+.chip input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.chip span {
+  display: inline-block;
+  padding: 9px 14px;
+  border: 1.5px solid #cfd8cb;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--paper);
+  color: var(--ink);
+}
+.chip input:checked + span {
+  background: var(--canopy);
+  border-color: var(--canopy);
+  color: #fff;
+}
+.chip input:focus-visible + span {
+  outline: 2px solid var(--circuit);
+  outline-offset: 2px;
+}
+
+/* Formspree honeypot: kept out of view and out of the tab order. */
+.hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Submission status (sending / sent / failed). Empty until a submission starts. */
+.status {
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  border: 1px solid var(--surface-200);
+  background: var(--surface);
+  color: var(--ink);
+}
+.status:empty {
+  display: none;
+}
+.status[data-state="success"] {
+  border-color: var(--signal-300);
+  background: #eef7ec;
+  color: var(--signal-700);
+  font-weight: 600;
+}
+.status[data-state="error"] {
+  border-color: var(--hazard);
+  background: #fbefec;
+  color: var(--hazard);
+  font-weight: 600;
+}
+
+.done {
+  margin-top: 20px;
+  background: var(--paper);
+  border: 1px solid var(--signal-300);
+  padding: 22px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.done pre {
+  white-space: pre-wrap;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--ink-600);
+  background: var(--surface);
+  padding: 14px;
+  margin: 0;
+  border-radius: var(--radius);
+}
+
+@media (max-width: 560px) {
+  .row2 {
+    grid-template-columns: 1fr;
+  }
+}

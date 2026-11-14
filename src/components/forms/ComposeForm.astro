@@ -1,0 +1,76 @@
+---
+import { site } from "../../data/site";
+import Arrow from "../Arrow.astro";
+import styles from "./Form.module.css";
+
+interface Props {
+  id: string;
+  /** First line of the composed message and the email/Formspree subject. */
+  subject: string;
+  /** Formspree endpoint URL. When absent the form only prepares a WhatsApp/email message, as the original did. */
+  endpoint?: string | undefined;
+  /** "request" (pickup form) or "message" (contact form); used in button and status text. */
+  noun: "request" | "message";
+  /** Id of the <pre> that holds the composed message (target of the copy button). */
+  messageId: string;
+}
+
+const { id, subject, endpoint, noun, messageId } = Astro.props;
+const submitLabel = endpoint ? `Send ${noun}` : `Prepare ${noun}`;
+const readyTitle = `Your ${noun} is ready to send`;
+const text = {
+  sending: `Sending your ${noun}…`,
+  success: `Thank you. Your ${noun} has been sent to CyberGreen. We reply within one working day.`,
+  error: `Sorry, your ${noun} could not be sent online. Please send it on WhatsApp or by email below, or call ${site.phone.display}.`,
+  doneSuccess: `Prefer WhatsApp or email? Your ${noun} is ready to send there too`,
+};
+---
+
+<div class:list={[styles.panel, "reveal"]}>
+  <form
+    class={styles.form}
+    id={id}
+    action={endpoint}
+    method={endpoint ? "post" : undefined}
+    data-compose={subject}
+    data-whatsapp={site.phone.whatsapp}
+    data-email={site.email}
+    data-endpoint={endpoint}
+    data-msg-sending={text.sending}
+    data-msg-success={text.success}
+    data-msg-error={text.error}
+    data-title-ready={readyTitle}
+    data-title-success={text.doneSuccess}
+  >
+    <slot />
+    {endpoint && (
+      <>
+        <input type="hidden" name="_subject" value={subject} />
+        {/* Formspree honeypot: real visitors never see or fill this; bots that do are discarded. */}
+        <div class={styles.hp} aria-hidden="true">
+          <label for={`${id}-gotcha`}>Leave this field empty</label>
+          <input id={`${id}-gotcha`} type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+        </div>
+      </>
+    )}
+    <button class:list={["btn btn-green", styles.submit]} type="submit" data-submit>
+      {submitLabel} <Arrow />
+    </button>
+  </form>
+  <p class={styles.status} role="status" aria-live="polite" data-form-status></p>
+  <div class={styles.done} hidden data-form-done>
+    <b data-form-done-title>{readyTitle}</b>
+    <pre id={messageId} data-form-message></pre>
+    <div class="btns">
+      <a class="btn btn-green" target="_blank" rel="noopener" href="#" data-wa>
+        Send on WhatsApp
+      </a>
+      <a class="btn btn-line-dark" href="#" data-email-link>
+        Send by email
+      </a>
+      <button class="btn btn-line-dark" type="button" data-copy={`#${messageId}`}>
+        Copy message
+      </button>
+    </div>
+  </div>
+</div>

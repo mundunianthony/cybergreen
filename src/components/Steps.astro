@@ -1,0 +1,30 @@
+---
+import styles from "./Steps.module.css";
+
+export interface Step {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  items: readonly Step[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class:list={[styles.steps, { [styles.four ?? ""]: items.length === 4 }, "reveal-stagger"]}>
+  <div class={styles.line} aria-hidden="true" data-steps-line>
+    <svg>
+      <line class={styles.base} x1="0" y1="1" x2="1000" y2="1" data-line-base></line>
+      <line class={styles.cover} x1="0" y1="1" x2="1000" y2="1" data-line-cover></line>
+    </svg>
+  </div>
+  {items.map((step, i) => (
+    <div class={styles.step}>
+      <span class={styles.dot}>{i + 1}</span>
+      <h3>{step.title}</h3>
+      <p>{step.text}</p>
+    </div>
+  ))}
+</div>

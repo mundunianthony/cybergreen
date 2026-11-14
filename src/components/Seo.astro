@@ -1,0 +1,30 @@
+---
+import { site, type RoutePath } from "../data/site";
+
+interface Props {
+  title: string;
+  description: string;
+  path: RoutePath;
+  /** Root-relative image path; made absolute so social scrapers can fetch it. */
+  ogImage?: string | undefined;
+}
+
+const { title, description, path, ogImage = site.defaultOgImage } = Astro.props;
+const origin = Astro.site ?? new URL(site.url);
+const canonical = new URL(path, origin).href;
+const image = new URL(ogImage, origin).href;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content="en_UG" />
+<meta property="og:image" content={image} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#143620" />
+<link rel="sitemap" href="/sitemap-index.xml" />

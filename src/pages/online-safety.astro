@@ -1,0 +1,158 @@
+---
+import Arrow from "../components/Arrow.astro";
+import Cat from "../components/Cat.astro";
+import Cats from "../components/Cats.astro";
+import PageHero from "../components/PageHero.astro";
+import Steps from "../components/Steps.astro";
+import Targets from "../components/Targets.astro";
+import { posterSrc } from "../data/posters";
+import { routes } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import s from "../styles/pages/shared.module.css";
+---
+
+<BaseLayout
+  title="Online safety training | CyberGreen"
+  description="Online safety and cybersecurity awareness programmes for youth, parents, schools, communities and small businesses in Uganda."
+  path={routes.onlineSafety}
+>
+  <PageHero
+    crumb="Online safety"
+    title="Online safety that people actually use"
+    lead="Short, practical sessions for learners, parents, teachers, communities and small businesses, built around the scams and risks Ugandans meet every day."
+    images={[
+      { name: "pin", alt: "A mobile money PIN pad" },
+      { name: "posts", alt: "Social media posts being shared" },
+      { name: "school", alt: "Online safety lesson on a chalkboard" },
+    ]}
+  >
+    <Fragment slot="actions">
+      <a class="btn btn-copper" href={routes.contact}>
+        Book a session <Arrow />
+      </a>
+    </Fragment>
+  </PageHero>
+  <section>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">Who we train</span>
+        <h2>The same habits, framed for each audience</h2>
+      </div>
+      <Cats>
+        <Cat icon="people" title="Youth" tag="#YouthOnlineSafety">
+          <ul class="plain">
+            <li>Think before you post. Once shared, it is out there.</li>
+            <li>Protect your privacy with strong passwords and settings.</li>
+            <li>Speak up and report cyberbullying.</li>
+            <li>Check sources before you share.</li>
+          </ul>
+        </Cat>
+        <Cat icon="phoneText" title="Parents and guardians" tag="#DigitalParenting">
+          <ul class="plain">
+            <li>Talk openly about what children see online.</li>
+            <li>Agree limits on screen time and device use.</li>
+            <li>Be a role model with your own habits.</li>
+            <li>Keep up with the apps and games they use.</li>
+          </ul>
+        </Cat>
+        <Cat icon="cap" title="Schools and educators" tag="#SafeSchools">
+          <ul class="plain">
+            <li>Teach online safety as part of the timetable.</li>
+            <li>Set clear rules for phones and school devices.</li>
+            <li>Build digital citizenship: respect and empathy.</li>
+            <li>Work with CyberGreen on a term programme.</li>
+          </ul>
+        </Cat>
+      </Cats>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">School programme</span>
+        <h2>A term-long programme, not a one-off talk</h2>
+        <p class="lead">
+          Lessons stick when they are repeated and owned by the school. Our programme runs across one term.
+        </p>
+      </div>
+      <Steps
+        items={[
+          {
+            title: "Learner sessions",
+            text: "Interactive sessions grouped by age, on privacy, scams, cyberbullying and checking information.",
+          },
+          {
+            title: "Teacher workshop",
+            text: "Teachers and the school counsellor learn to spot warning signs and handle incidents.",
+          },
+          {
+            title: "Parent evening",
+            text: "A practical session for parents on talking to children about their online lives.",
+          },
+          {
+            title: "Digital Safety Club",
+            text: "Student leaders keep it going, with posters and a simple reporting guide.",
+          },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split center">
+      <div class="stack g20 reveal">
+        <span class="label">Communities and small businesses</span>
+        <h2>Built around the scams people actually meet</h2>
+        <p class="lead">
+          We run sessions with markets, savings groups, churches, youth clubs and SMEs, often with a sponsor such as a
+          telecom, bank or SACCO.
+        </p>
+        <ul class="ticks">
+          <li>"I sent money to your number by mistake" reversal scams</li>
+          <li>SIM swap and shared PINs or one-time codes</li>
+          <li>Fake jobs, scholarships and loan offers</li>
+          <li>WhatsApp and social media account takeovers</li>
+          <li>Basic cyber hygiene for small business owners</li>
+        </ul>
+        <a class="btn btn-green self-start" href={routes.contact}>
+          Arrange a community session <Arrow />
+        </a>
+      </div>
+      <div class:list={[s.poster, "reveal"]}>
+        <img
+          src={posterSrc("08_your_pin_is_yours")}
+          alt="Poster: Your PIN is yours alone"
+          width="1080"
+          height="1350"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">How we measure it</span>
+        <h2>We check what changed</h2>
+      </div>
+      <Targets
+        items={[
+          {
+            title: "Before and after",
+            text: "Every session starts and ends with a short quiz, so you can see the change in knowledge.",
+          },
+          {
+            title: "Follow-up",
+            text: "Schools and organisations get a check-in a month later to see which habits stuck.",
+          },
+          {
+            title: "A short report",
+            text: "Attendance, results and recommendations you can share with your board, parents or funder.",
+          },
+        ]}
+      />
+    </div>
+  </section>
+</BaseLayout>

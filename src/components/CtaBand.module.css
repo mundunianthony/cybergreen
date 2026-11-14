@@ -1,0 +1,35 @@
+.cta {
+  background: var(--signal);
+  color: #fff;
+  padding-block: clamp(56px, 7vw, 80px);
+  position: relative;
+  overflow: hidden;
+}
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/img/traces.svg");
+  background-size: 480px;
+  opacity: 0.12;
+}
+.inner {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.cta h2 {
+  color: #fff;
+  max-width: 20ch;
+}
+.cta p {
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 10px;
+  max-width: 52ch;
+}
+.cta :global(.btn-line) {
+  border-color: rgba(255, 255, 255, 0.6);
+}

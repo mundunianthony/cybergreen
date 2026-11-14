@@ -1,0 +1,36 @@
+---
+import styles from "./Form.module.css";
+
+interface ChipOption {
+  value: string;
+  checked?: boolean;
+}
+
+interface Props {
+  label: string;
+  /** Id of the visible group label (referenced by aria-labelledby). */
+  labelId: string;
+  /** Label used for this group in the composed WhatsApp/email message. */
+  q: string;
+  /** Field name submitted to Formspree. */
+  name: string;
+  type: "checkbox" | "radio";
+  options: readonly ChipOption[];
+}
+
+const { label, labelId, q, name, type, options } = Astro.props;
+---
+
+<div>
+  <span class={styles.lbl} id={labelId}>
+    {label}
+  </span>
+  <div class={styles.chips} data-q={q} data-chips role="group" aria-labelledby={labelId}>
+    {options.map((o) => (
+      <label class={styles.chip}>
+        <input type={type} name={name} value={o.value} checked={o.checked} />
+        <span>{o.value}</span>
+      </label>
+    ))}
+  </div>
+</div>

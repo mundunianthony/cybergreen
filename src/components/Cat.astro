@@ -1,0 +1,26 @@
+---
+import Icon from "./Icon.astro";
+import type { IconName } from "./icons";
+import styles from "./Cats.module.css";
+
+interface Props {
+  title: string;
+  icon?: IconName;
+  /** Short warning shown in the hazard colour. */
+  note?: string;
+  /** Hashtag label pinned to the bottom of the card. */
+  tag?: string;
+  /** "dark" is the variant used inside the "If a child is at risk" panel. */
+  variant?: "default" | "dark";
+}
+
+const { title, icon, note, tag, variant = "default" } = Astro.props;
+---
+
+<div class:list={[styles.cat, { [styles.dark ?? ""]: variant === "dark" }]}>
+  {icon && <Icon name={icon} class={styles.ic} />}
+  <h3>{title}</h3>
+  <slot />
+  {note && <span class={styles.note}>{note}</span>}
+  {tag && <span class:list={["label", styles.tag]}>{tag}</span>}
+</div>

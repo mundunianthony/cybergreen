@@ -1,0 +1,23 @@
+---
+import styles from "./Targets.module.css";
+
+export interface Target {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  items: readonly Target[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class:list={[styles.targets, "reveal-stagger"]}>
+  {items.map((t) => (
+    <div class={styles.target}>
+      <b>{t.title}</b>
+      <p>{t.text}</p>
+    </div>
+  ))}
+</div>

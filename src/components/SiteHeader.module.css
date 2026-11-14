@@ -1,0 +1,158 @@
+.header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 60;
+  background: var(--canopy);
+  border-bottom: 1px solid var(--canopy-700);
+  transition: box-shadow 0.3s;
+}
+.header[data-scrolled] {
+  box-shadow: 0 8px 24px rgba(8, 26, 15, 0.28);
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-h);
+  gap: 20px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+}
+.brand:hover {
+  color: #fff;
+}
+.logo {
+  height: 64px;
+  width: auto;
+  display: block;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.menu a {
+  color: var(--on-dark-2);
+  font-size: 0.93rem;
+  font-weight: 500;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  position: relative;
+}
+.menu a::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  height: 2px;
+  background: var(--circuit);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.menu a:hover {
+  color: #fff;
+}
+.menu a:hover::after,
+.menu a.active::after {
+  transform: scaleX(1);
+}
+.menu a.active {
+  color: #fff;
+}
+.menu :global(.btn) {
+  margin-left: 10px;
+  padding: 12px 18px;
+}
+.menu :global(.btn)::after {
+  display: none;
+}
+
+.toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--line-dark);
+  border-radius: var(--radius);
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  padding: 0;
+}
+.toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  margin: 5px auto;
+  transition:
+    transform 0.25s,
+    opacity 0.25s;
+}
+.toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 1280px) {
+  .menu a {
+    padding: 10px 8px;
+    font-size: 0.9rem;
+  }
+  .menu :global(.btn) {
+    margin-left: 4px;
+  }
+}
+/* The original declared the collapsed menu twice (<=880px and <=1120px); the effective result
+   was the <=1120px rules, consolidated here. */
+@media (max-width: 1120px) {
+  .toggle {
+    display: block;
+  }
+  .menu {
+    display: none;
+    position: absolute;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    background: var(--canopy);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px 22px;
+    border-bottom: 1px solid var(--canopy-700);
+    gap: 2px;
+  }
+  .menu[data-open] {
+    display: flex;
+  }
+  .menu a {
+    padding: 14px 8px;
+    font-size: 0.95rem;
+  }
+  .menu a::after {
+    left: 8px;
+    right: auto;
+    width: 28px;
+  }
+  .menu :global(.btn) {
+    margin: 10px 0 0;
+  }
+}
+@media (max-width: 880px) {
+  .logo {
+    height: 54px;
+  }
+}

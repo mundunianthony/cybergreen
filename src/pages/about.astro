@@ -1,0 +1,205 @@
+---
+import Frame from "../components/Frame.astro";
+import PageHero from "../components/PageHero.astro";
+import Path from "../components/Path.astro";
+import Paths from "../components/Paths.astro";
+import { routes, site } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import s from "../styles/pages/about.module.css";
+
+const values = [
+  { title: "Sustainability", text: "Protecting our environment for future generations." },
+  { title: "Integrity", text: "Operating ethically, honestly and transparently." },
+  { title: "Innovation", text: "Creative, practical and useful solutions." },
+  { title: "Community impact", text: "Empowering communities through education and technology." },
+  { title: "Security", text: "Safe, resilient and trusted digital spaces." },
+];
+---
+
+<BaseLayout
+  title="About CyberGreen Engineering Solutions"
+  description="Who CyberGreen is, why it exists, its values and leadership."
+  path={routes.about}
+>
+  <PageHero
+    crumb="About"
+    title="Engineering for a greener, safer Uganda"
+    lead="CyberGreen Engineering Solutions Co. Ltd is a Ugandan engineering, technology and sustainability company. We work where two fast-growing problems meet: electronic waste and online harm."
+    images={[
+      { name: "leaf", alt: "Leaf with circuit veins" },
+      { name: "school", alt: "Online safety lesson on a chalkboard" },
+      { name: "laptops", alt: "Retired laptops and a destruction certificate" },
+    ]}
+  />
+  <section>
+    <div class="wrap split">
+      <div class="stack g20 reveal">
+        <span class="label">Why we exist</span>
+        <h2>Technology should improve lives without costing the environment or people's safety.</h2>
+      </div>
+      <div class="stack g16 reveal">
+        <p class="lead">
+          As Uganda embraces digital transformation, new opportunities are arriving with real risks attached. Discarded
+          electrical and electronic equipment keeps growing. So do mobile money fraud, online exploitation and scams
+          that prey on low awareness.
+        </p>
+        <p>
+          CyberGreen was set up to address these connected challenges with practical, affordable and technology-driven
+          solutions. Our team combines engineering, environmental care, information security knowledge and community
+          engagement. We are based at the National ICT Innovation Hub in Nakawa, Kampala, and we work across Uganda and
+          the wider region.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="wrap">
+      <Frame>
+        <div>
+          <span class="label">Vision</span>
+          <h3>A greener, safer and digitally secure Uganda.</h3>
+        </div>
+        <div>
+          <span class="label">Mission</span>
+          <p>
+            To reduce electronic waste hazards while helping communities build cyber awareness, digital resilience and
+            secure access to technology, through engineering, education and partnerships.
+          </p>
+        </div>
+        <div>
+          <span class="label">Purpose</span>
+          <p>
+            Promote responsible e-waste management, improve cybersecurity awareness, strengthen digital resilience and
+            build digitally responsible communities.
+          </p>
+        </div>
+        <div>
+          <span class="label">Home base</span>
+          <p>
+            {site.address.venue}, {site.address.street}. {site.address.postal}.
+          </p>
+        </div>
+      </Frame>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">The challenges we address</span>
+        <h2>Two pressures, growing at the same time, on the same communities</h2>
+      </div>
+      <Paths>
+        <Path variant="b">
+          <h3>Electronic waste</h3>
+          <p>
+            Most of Uganda's discarded electronics are stored, dumped or handled informally, polluting soil and water
+            and exposing whatever data the devices still hold.
+          </p>
+          <ul class="ticks">
+            <li>Unsafe disposal and open burning</li>
+            <li>Environmental pollution</li>
+            <li>Data leakage from discarded devices</li>
+            <li>Loss of recoverable materials</li>
+            <li>Low public awareness</li>
+            <li>Weak circular economy practice</li>
+          </ul>
+        </Path>
+        <Path variant="b">
+          <h3>Online safety and cybersecurity</h3>
+          <p>
+            As internet access, mobile money and digital services spread, so do the risks. Cybercriminals reportedly
+            took more than UGX 72 billion from Ugandans in 2024.
+          </p>
+          <ul class="ticks">
+            <li>Mobile money and SIM swap fraud</li>
+            <li>Phishing and fake offers</li>
+            <li>Identity theft and account takeover</li>
+            <li>Cyberbullying and online exploitation</li>
+            <li>Misinformation</li>
+            <li>Poor everyday cyber hygiene</li>
+          </ul>
+        </Path>
+      </Paths>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">Core values</span>
+        <h2>How we work</h2>
+      </div>
+      <div class:list={[s.values, "reveal-stagger"]}>
+        {values.map((v) => (
+          <div class={s.value}>
+            <h3>{v.title}</h3>
+            <p>{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">Leadership</span>
+      </div>
+      <div class:list={[s.leader, "reveal"]}>
+        <div class={s.portrait}>
+          <span>MR</span>
+          <small>Photo coming soon</small>
+        </div>
+        <div class="stack g16">
+          <h2>Eng. Muhangi Robert</h2>
+          <p class="eyebrow">Managing Director and Lead Consultant</p>
+          <p class="lead">
+            Robert is a telecommunications engineer, information security specialist, researcher and technology
+            consultant. His experience spans engineering systems, ICT infrastructure, aviation electronics, online
+            safety training, digital transformation and environmental sustainability.
+          </p>
+          <p>
+            He is a Corporate Member of the Uganda Institution of Professional Engineers. Robert leads CyberGreen's
+            strategy, partnerships, innovation and technical delivery, supported by a multidisciplinary team of
+            engineers, technicians, trainers, researchers and communicators.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">The rules we follow</span>
+        <h2>Aligned with Uganda's laws and recognised practice</h2>
+      </div>
+      <Frame>
+        <div>
+          <h4>Environment</h4>
+          <p>
+            National Environment Act 2019 and the National Environment (Waste Management) Regulations 2020, with NEMA
+            guidance on hazardous waste.
+          </p>
+        </div>
+        <div>
+          <h4>E-waste policy</h4>
+          <p>
+            Uganda's E-waste Management Policy and Strategy, and the Ministry of ICT and UCC work on circular economy
+            for ICT equipment.
+          </p>
+        </div>
+        <div>
+          <h4>Data protection</h4>
+          <p>The Data Protection and Privacy Act 2019 and guidance from the Personal Data Protection Office.</p>
+        </div>
+        <div>
+          <h4>Data sanitisation</h4>
+          <p>Wiping and destruction methods based on internationally used guidance such as NIST SP 800-88.</p>
+        </div>
+      </Frame>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,52 @@
+---
+import { contactNav, mainNav, routes, site, type RoutePath } from "../data/site";
+import styles from "./SiteHeader.module.css";
+
+interface Props {
+  current: RoutePath;
+}
+
+const { current } = Astro.props;
+const isContact = current === contactNav.href;
+---
+
+<header class={styles.header} data-site-header>
+  <div class:list={["wrap", styles.nav]}>
+    <a class={styles.brand} href={routes.home} aria-label="CyberGreen home">
+      <img class={styles.logo} src="/assets/img/logo-dark.png" alt={site.logoAlt} width="480" height="209" />
+    </a>
+    <button
+      class={styles.toggle}
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="menu"
+      data-nav-toggle
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class={styles.menu} id="menu" data-nav-menu>
+      {mainNav.map((item) => {
+        const active = item.href === current;
+        return (
+          <li>
+            <a
+              href={item.href}
+              class:list={{ [styles.active ?? ""]: active }}
+              aria-current={active ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        );
+      })}
+      <li>
+        <a class="btn btn-copper" href={contactNav.href} aria-current={isContact ? "page" : undefined}>
+          {contactNav.label}
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
